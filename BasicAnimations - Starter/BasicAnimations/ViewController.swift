@@ -99,7 +99,11 @@ class ViewController: UIViewController {
     // MARK: - Actions
     
     @objc func rotateButtonTapped() {
-        
+        UIView.animate(withDuration: 2, animations: {
+            self.label.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 4)
+        }) { (_) in
+            self.label.transform = .identity
+        }
     }
     
     @objc func keyButtonTapped() {
