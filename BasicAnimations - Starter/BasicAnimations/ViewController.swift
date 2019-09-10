@@ -142,7 +142,14 @@ class ViewController: UIViewController {
     }
     
     @objc func coreAnimationButtonTapped() {
-        
+        let colorAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.borderColor))
+        colorAnimation.fromValue = label.layer.borderColor
+        let newBorderColor = randomColor()
+        colorAnimation.toValue = newBorderColor
+        colorAnimation.duration = 1.5
+        label.layer.borderColor = newBorderColor
+        colorAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        label.layer.add(colorAnimation, forKey: nil)
     }
     
     private func randomColor() -> CGColor {
