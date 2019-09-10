@@ -107,11 +107,30 @@ class ViewController: UIViewController {
     }
     
     @objc func keyButtonTapped() {
-        
+        UIView.animateKeyframes(withDuration: 2, delay: 0, options: [], animations: {
+            // first animation (rotate and return)
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.25, animations: {
+                self.label.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 4)
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25, animations: {
+                self.label.transform = .identity
+            })
+            
+            //second animation (up and return)
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.25, animations: {
+                self.label.center = CGPoint(x: self.label.center.x, y: self.label.center.y - 100)
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.25, animations: {
+                self.label.center = self.view.center
+            })
+        }, completion: nil)
     }
     
     @objc func springButtonTapped() {
-    
+        self.label.transform = CGAffineTransform(translationX: 0, y: -200)
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: .curveEaseOut, animations: {
+            self.label.transform = .identity
+        }, completion: nil)
     }
     
     @objc func squashButtonTapped() {
